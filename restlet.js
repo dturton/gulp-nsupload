@@ -1,7 +1,7 @@
 //The restlet that will need to be uploaded to NetSuite for the gulp plugin to run.
 
 function writeFile (data) {
-  var files = nlapiSearchRecord('file', null, [new nlobjSearchFilter('name', null, 'is', data.name)], [new nlobjSearchColumn('folder')]);
+  var files = nlapiSearchRecord('file', null, [new nlobjSearchFilter('name', null, 'is', data.name)], [new nlobjSearchColumn('folder')]) || [];
 
   var newFileNumber;
   if(files.length === 1) {
