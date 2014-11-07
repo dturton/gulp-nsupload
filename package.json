@@ -1,16 +1,32 @@
 {
   "name": "nsupload",
   "version": "1.0.0",
-  "description": "",
+  "description": "A gulp module to upload files to netsuite given proper config.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "dev@truecloud.com",
+  "license": "MIT",
   "dependencies": {
     "gulp-util": "^3.0.1",
     "request": "^2.47.0",
-    "through": "^2.3.6"
-  }
+    "through": "^2.3.6",
+    "underscore": "^1.7.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/truecloud/gulp-nsupload"
+  },
+  "keywords": [
+    "gulp",
+    "netsuite",
+    "upload",
+    "file"
+  ],
+  "bugs": {
+    "url": "https://github.com/truecloud/grunt-nsupload/issues"
+  },
+  "homepage": "https://github.com/truecloud/grunt-nsupload"
 }

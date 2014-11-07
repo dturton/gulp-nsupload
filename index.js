@@ -3,8 +3,7 @@ var request = require('request')
   , path = require('path')
   , through = require('through');
 
-var URL = 'https://rest.sandbox.netsuite.com/app/site/hosting/restlet.nl?deploy=1&script=<%= script %>&file=<%= file %>';
-var tmpl = _.template(URL);
+var URL = 'https://rest.sandbox.netsuite.com/app/site/hosting/restlet.nl';
 
 var config = require(path.resolve('./nsrest.json'));
 
@@ -12,7 +11,7 @@ if(!(config.account && config.email && config.password)) {
   throw 'Must provide netsuite config';
 }
 
-var AUTH_STRING = 'NLAUTH nlauth_account=<%= account %>,nlauth_email=<%= email %>,nlauth_signature=<%= password %>';
+var AUTH_STRING = 'NLAuth  nlauth_account=<%= account %>, nlauth_email=<%= email %>, nlauth_signature=<%= password %>';
 var authHeader = _.template(AUTH_STRING)(config);
 
 module.exports = function(file, options) {
@@ -21,13 +20,22 @@ module.exports = function(file, options) {
   function sendFile (file) {
 
     //Upload them to netsuite by name
-    var url = tmpl({file: file, script: config.script});
+    var fileName = path.basename(file.path);
 
     //Pipe the response
-    return request({
+    request({
+      uri: URL,
+      qs: {
+        deploy: 1,
+        script: config.script
+      },
       method: 'PUT',
       headers: {
         Authorization: authHeader
+      },
+      json: {
+        name: fileName,
+        content: file._contents.toString()
       }
     });
   }
