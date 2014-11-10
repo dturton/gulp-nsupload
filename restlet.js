@@ -10,28 +10,25 @@ function writeFile (data) {
   //Remove filename
   path.pop();
 
+  var folder;
+
   var file = nlapiCreateFile(data.name, 'PLAINTEXT', data.content);
   if(files.length === 1) {
     folder = files[0].getValue('folder');
 
     //Otherwise if the uploaded path is more than just filename
   } else if(path.length > 0 && files.length > 1) {
-    var curFolder = -15;
 
-    // Search down folder tree
-    while(path.length && curFolder) {
-      var filters = [
-        new nlobjSearchFilter('name', null, 'is', path.unshift()),
-        new nlobjSearchFilter('parent', null, 'is', curFolder)
-      ];
+    var folderName = path.pop();
 
-      var foundFolder = nlapiSearchRecord('folder', null, filters).getId();
-
-      curFolder = foundFolder && foudFolder.getId();
+    for(var i = 0; i < files.length; i++) {
+      if(files[i].getText('folder') === folderName) {
+        folder = files[i].getValue('folder');
+      }
     }
   }
 
-  file.setFolder(files[0].getValue('folder'));
+  file.setFolder(folder);
   newFileNumber = nlapiSubmitFile(file);
   return newFileNumber;
 }
