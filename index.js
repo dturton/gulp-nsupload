@@ -5,17 +5,11 @@ var request = require('request')
 
 var URL = 'https://rest.sandbox.netsuite.com/app/site/hosting/restlet.nl';
 
-var config = require(path.resolve('./nsrest.json'));
-
-if(!(config.account && config.email && config.password)) {
-  throw 'Must provide netsuite config';
-}
-
 var AUTH_STRING = 'NLAuth  nlauth_account=<%= account %>, nlauth_email=<%= email %>, nlauth_signature=<%= password %>';
-var authHeader = _.template(AUTH_STRING)(config);
 
 //Catch files
 function sendFile (file) {
+  var authHeader = _.template(AUTH_STRING)(config);
 
   //Upload them to netsuite by name
   var fileName = path.basename(file.path);
@@ -33,12 +27,18 @@ function sendFile (file) {
     },
     json: {
       name: fileName,
+      path: file.path,
       content: file._contents.toString()
     }
   });
 }
 
 module.exports = function(file, options) {
+  if(!(options && options.email && options.password && options.account && options.script)) {
+    throw new Error('Options are required. Please provide {email:'', password:'', account: 123, script:123}');
+  }
+
+  config = options;
   return through(sendFile);
 };
 
