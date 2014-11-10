@@ -14,31 +14,32 @@ if(!(config.account && config.email && config.password)) {
 var AUTH_STRING = 'NLAuth  nlauth_account=<%= account %>, nlauth_email=<%= email %>, nlauth_signature=<%= password %>';
 var authHeader = _.template(AUTH_STRING)(config);
 
+//Catch files
+function sendFile (file) {
+
+  //Upload them to netsuite by name
+  var fileName = path.basename(file.path);
+
+  //Pipe the response
+  request({
+    uri: URL,
+    qs: {
+      deploy: 1,
+      script: config.script
+    },
+    method: 'PUT',
+    headers: {
+      Authorization: authHeader
+    },
+    json: {
+      name: fileName,
+      content: file._contents.toString()
+    }
+  });
+}
+
 module.exports = function(file, options) {
-
-  //Catch files
-  function sendFile (file) {
-
-    //Upload them to netsuite by name
-    var fileName = path.basename(file.path);
-
-    //Pipe the response
-    request({
-      uri: URL,
-      qs: {
-        deploy: 1,
-        script: config.script
-      },
-      method: 'PUT',
-      headers: {
-        Authorization: authHeader
-      },
-      json: {
-        name: fileName,
-        content: file._contents.toString()
-      }
-    });
-  }
-
   return through(sendFile);
 };
+
+module.exports.send = sendFile;
