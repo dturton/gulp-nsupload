@@ -33,7 +33,7 @@ function sendFile (file) {
   });
 }
 
-module.exports = function(file, options) {
+module.exports = function(options) {
   if(!(options && options.email && options.password && options.account && options.script)) {
     throw new Error('Options are required. Please provide {email:'', password:'', account: 123, script:123}');
   }
