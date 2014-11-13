@@ -30,5 +30,7 @@ function writeFile (data) {
 
   file.setFolder(folder);
   newFileNumber = nlapiSubmitFile(file);
+
+  nlapiLogExecution('DEBUG', 'uploaded', data.path.toString());
   return newFileNumber;
 }
