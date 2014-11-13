@@ -3,7 +3,8 @@ var request = require('request')
   , path = require('path')
   , through = require('through');
 
-var URL = 'https://rest.sandbox.netsuite.com/app/site/hosting/restlet.nl';
+var URL_TEMPLATE = 'https://<%= domain %>/app/site/hosting/restlet.nl';
+var url;
 
 var AUTH_STRING = 'NLAuth  nlauth_account=<%= account %>, nlauth_email=<%= email %>, nlauth_signature=<%= password %>';
 
@@ -40,6 +41,9 @@ function sendFile (file) {
 }
 
 module.exports = function(options) {
+  options.domain = options.domain || 'rest.sandbox.netsuite.com';
+
+  url = _.template(URL_TEMPLATE, options);
   if(!(options && options.email && options.password && options.account && options.script)) {
     throw new Error('Options are required. Please provide {email:\'\', password:\'\', account: 123, script:123}');
   }
