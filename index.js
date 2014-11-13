@@ -17,7 +17,7 @@ function sendFile (file) {
 
   //Pipe the response
   request({
-    uri: URL,
+    uri: url,
     qs: {
       deploy: 1,
       script: config.script
@@ -43,7 +43,7 @@ function sendFile (file) {
 module.exports = function(options) {
   options.domain = options.domain || 'rest.sandbox.netsuite.com';
 
-  url = _.template(URL_TEMPLATE, options);
+  url = _.template(URL_TEMPLATE)(options);
   if(!(options && options.email && options.password && options.account && options.script)) {
     throw new Error('Options are required. Please provide {email:\'\', password:\'\', account: 123, script:123}');
   }
