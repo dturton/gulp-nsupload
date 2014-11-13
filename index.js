@@ -30,12 +30,18 @@ function sendFile (file) {
       path: file.path,
       content: file._contents.toString()
     }
+  }, function(err, b, data) {
+    if(err) {
+      console.log('Error uploading file ' + file.path);
+    } else {
+      console.log('Successfully uploaded file ' + file.path);
+    }
   });
 }
 
 module.exports = function(options) {
   if(!(options && options.email && options.password && options.account && options.script)) {
-    throw new Error('Options are required. Please provide {email:'', password:'', account: 123, script:123}');
+    throw new Error('Options are required. Please provide {email:\'\', password:\'\', account: 123, script:123}');
   }
 
   config = options;
