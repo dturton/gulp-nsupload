@@ -1,9 +1,9 @@
-#gulp-nsupload
-###A gulp plugin for uploading to NetSuite
+# gulp-nsupload
+### A gulp plugin for uploading to NetSuite
 
 If your filename is unique, gulp-nsupload will upload it to netsuite for you. Recommended for use with gulp-watch.
 
-##Installation
+## Installation
 
 Here's what you need to do.
 
