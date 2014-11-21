@@ -33,16 +33,13 @@ function sendFile (file) {
         path: file.path,
         content: file._contents.toString()
       }
-    }, function(err, b, data) {
-
-      var body;
-      console.log(b.body.error);
-
-      err = err || b.body.error
-
-      if(err && b.statusCode !== 200 && body && body.statusCode !== 200) {
+    }, function(err, res, data) {
+      if(err || !res) {
         console.log('Error uploading file ' + file.path);
         console.log(err);
+      } else if(res.body && res.body.statusCode && res.body.statusCode !== 200){
+        console.log('Error');
+        console.log(res.statusCode);
       } else {
         console.log('Successfully uploaded file ' + file.path);
       }
