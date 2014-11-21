@@ -34,8 +34,15 @@ function sendFile (file) {
         content: file._contents.toString()
       }
     }, function(err, b, data) {
-      if(err && b.statusCode !== 200) {
+
+      var body;
+      console.log(b.body.error);
+
+      err = err || b.body.error
+
+      if(err && b.statusCode !== 200 && body && body.statusCode !== 200) {
         console.log('Error uploading file ' + file.path);
+        console.log(err);
       } else {
         console.log('Successfully uploaded file ' + file.path);
       }
