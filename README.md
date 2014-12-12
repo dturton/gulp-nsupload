@@ -1,4 +1,5 @@
 # gulp-nsupload
+
 ### A gulp plugin for uploading to NetSuite
 
 If your filename is unique, gulp-nsupload will upload it to netsuite for you. Recommended for use with gulp-watch.
@@ -16,6 +17,9 @@ The upload function will return a stream handler, and must be called with the fo
 - password - The password for the same user
 - account - The netsuite account number (get from Setup > Integration > Webservices)
 - script - The script ID of the deployed restlet.
+- [domain] - Optional domain to use for the upload. Useful for continuous integration and automated releases to PRD.
+Defaults to rest.netsuite.com
+- [method] - Optional method that you deployed the restlet function to. Defaults 
 
 See below for an example gulpfile
 
