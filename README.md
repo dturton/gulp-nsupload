@@ -5,8 +5,6 @@ If your filename is unique, gulp-nsupload will upload it to netsuite for you. Re
 
 ## Installation
 
-Here's what you need to do.
-
 Install and deploy the included Restlet. You'll need the script internal id for the config file.
 
 You'll probably want to use the PUT verb for the function, although NetSuite doesn't allow you to be truly 
