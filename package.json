@@ -7,13 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "dev@truecloud.com",
-  "license": "MIT",
+  "license": "GPLv2",
   "dependencies": {
     "gulp-util": "^3.0.1",
     "nsupload": "^1.1.0",
-    "request": "^2.47.0",
-    "through": "^2.3.6",
-    "underscore": "^1.7.0"
+    "through": "^2.3.6"
   },
   "devDependencies": {},
   "repository": {
@@ -24,7 +22,9 @@
     "gulp",
     "netsuite",
     "upload",
-    "file"
+    "file",
+    "suitelet",
+    "restlet"
   ],
   "bugs": {
     "url": "https://github.com/truecloud/grunt-nsupload/issues"
